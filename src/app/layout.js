@@ -8,7 +8,7 @@ const font = Roboto ({
 });
 
 export const metadata = {
-    title: "<escreva o nome para aparecer na aba do navegador>",
+    title: "The Last Of Us",
     icons: {
     icon: "/icons/favicon.ico",
   },

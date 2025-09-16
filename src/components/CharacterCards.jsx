@@ -9,13 +9,13 @@ export default function CharacterCards({ character, onClick }) {
     const game = character?.game || "N/A";
     const photo = character?.photo;
     const quotes = character?.quotes || "";
-    const favoriteWeapon = character?.favorite_weapon || "N/A";
+    const favoriteWeapon = character?.weapon_name || "N/A";
 
     return (
         <div className={styles.cardContainer} onClick={onClick}>
             <div className={styles.card}>
                 <Image
-                    src={photo ? `http://localhost:3000/uploads/${character.photo}.png` : "https://placehold.jp/200x200.png"}
+                    src={photo ? `http://localhost:3000/uploads/${character.photo}.jpg` : "https://placehold.jp/200x200.png"}
                     alt={name}
                     width={150}
                     height={150}

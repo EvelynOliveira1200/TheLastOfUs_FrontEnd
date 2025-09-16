@@ -13,7 +13,7 @@ export default function WeaponsCards({ weapon, onClick }) {
                 <Image
                     src={
                         weapon.photo
-                            ? `http://localhost:3000/uploads/${weapon.photo}.png`
+                            ? `http://localhost:3000/uploads/${weapon.photo}.jpg`
                             : "https://placehold.jp/200x200.png"
                     }
                     alt={weapon.name || "Arma"}

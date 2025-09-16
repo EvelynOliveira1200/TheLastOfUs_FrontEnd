@@ -1,6 +1,32 @@
+@font-face {
+  font-family: 'Oswald';
+  src: url('/fonts/Oswald-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oswald-Medium';
+  src: url('/fonts/Oswald-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Anton-Regular';
+  src: url('/fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font), sans-serif,   Arial, Helvetica, sans-serif;
 }
+
+h1, .title, ul, li, p, a, button, link {
+  font-family: 'Anton-Regular', sans-serif;
+}
+

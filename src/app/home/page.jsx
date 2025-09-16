@@ -1,83 +1,22 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import WeaponsCards from "../../components/WeaponsCards";
-import { Pagination } from 'antd';
 import styles from "./Home.module.css";
-import Link from "next/link";
+import Header from "../../components/Header";
+import Image from "next/image";
 
 export default function Page() {
-
-    const [loading, setLoading] = useState(false);
-    const [weapons, setWeapons] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(8);
-
-    const currentWeapons = weapons.slice(
-        (currentPage - 1) * pageSize,
-        currentPage * pageSize
-    );
-
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
-
-    const handlePageSizeChange = (current, size) => {
-        setPageSize(size);
-        setCurrentPage(1);
-    };
-
-    const fetchWeapons = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get("http://localhost:3000/api/weapons");
-            if (response.status === 200 && Array.isArray(response.data)) {
-                setWeapons(response.data);
-            } else {
-                console.error("Resposta inesperada:", response);
-            }
-        } catch (error) {
-            console.error("Erro ao buscar armas:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchWeapons();
-    }, []);
-
     return (
         <div className={styles.container}>
-
-            {loading && <p className="text-center">Carregando...</p>}
-
-            <div className={styles.cardGrid}>
-                {currentWeapons.length > 0 ? (
-                    currentWeapons.map((weapon) => (
-                        <WeaponsCards
-                            key={weapon.id}
-                            weapon={weapon}
-                            onClick={() => console.log(weapon.name)}
-                        />
-                    ))
-                ) : (
-                    !loading && <p className="text-center">Nenhuma arma encontrada.</p>
-                )}
+            <Header/>
+            <div className={styles.banner}>
+                <Image src="/image/banner0.jpg" alt="The Last of Us" layout="fill" objectFit="cover"/>
             </div>
-
-            <div className="flex justify-center mt-4">
-                <Pagination
-                    current={currentPage}
-                    pageSize={pageSize}
-                    total={weapons.length}
-                    onChange={handlePageChange}
-                    showSizeChanger
-                    onShowSizeChange={handlePageSizeChange}
-                />
-            </div>
-
-            <Link href="/infected">Ver todos os infectados</Link>
+            <main className={styles.main}>
+                
+                <h1 className={styles.title}>Bem-vindo ao The Last of Us</h1>
+                <p className={styles.description}>
+                    Explore o universo de The Last of Us, conheça os personagens, armas e infectados.
+                </p>
+            </main>
         </div>
     );
 }
