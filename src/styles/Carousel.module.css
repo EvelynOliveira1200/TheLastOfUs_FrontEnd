@@ -1,0 +1,59 @@
+
+.carousel {
+    position: relative;
+    width: 550px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    margin-right: 3rem;
+    margin-top: 2rem;
+    perspective: 1200px;
+}
+
+.carouselItem {
+    position: absolute;
+    transition: all 0.6s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.carouselImage {
+    width: 200px;
+    height: 280px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: center 20%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    border: 2px solid rgba(255, 152, 0, 0.4);
+    transition: all 0.6s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .carousel {
+        width: 100%;
+        max-width: 400px;
+        height: 250px;
+        margin-right: 0;
+        margin-top: 0;
+        order: -1;
+    }
+    
+    .carouselImage {
+        width: 160px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel {
+        width: 100%;
+        max-width: 320px;
+        height: 200px;
+    }
+    
+    .carouselImage {
+        width: 140px;
+        height: 190px;
+    }
+}
