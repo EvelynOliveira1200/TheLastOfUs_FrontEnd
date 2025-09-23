@@ -4,6 +4,8 @@ import axios from "axios";
 import CharacterCards from "../../components/CharacterCards";
 import { Pagination } from 'antd';
 import styles from "./character.module.css";
+import Image from "next/image";
+import Header from "../../components/Header";
 
 export default function Page() {
 
@@ -29,7 +31,7 @@ export default function Page() {
     const fetchCharacters = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:3000/api/characters");
+            const response = await axios.get("http://localhost:4000/api/characters");
             if (response.status === 200 && Array.isArray(response.data)) {
                 setCharacters(response.data);
             } else {
@@ -48,6 +50,19 @@ export default function Page() {
 
     return (
         <div className={styles.container}>
+            <Header />
+            <div className={styles.banner}>
+                <Image 
+                    src="/image/person.jpg"
+                    alt="The Last of Us - Personagens"
+                    layout="fill"
+                    objectFit="cover"
+                />
+                <div className={styles.bannerContent}>
+                    <h1 className={styles.bannerTitle}>Personagens</h1>
+                    <p className={styles.bannerSubtitle}>Explore os personagens inesquecíveis do universo de The Last of Us.</p>
+                </div>
+            </div>
 
             {loading && <p className="text-center">Carregando...</p>}
 

@@ -205,30 +205,91 @@
 }
 
 .jogos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     width: 100%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 3rem 0;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.jogosCard {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    gap: 8rem;
-    background: #000000;
+    border-radius: 16px;
+    background: rgba(20, 20, 20, 0.92);
+    padding: 2rem 2rem;
+    box-shadow: 0 4px 20px #ffb0393f;
+    width: 95vw;
+    max-width: 600px;
+    gap: 2rem;
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+.jogosCard:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45);
 }
 
-.jogosContent {
-    max-width: 550px;
-    margin-left: 10rem;
-    text-align: left;
+.jogoInfo {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
-    color: #f0f0f0;
+    gap: 0.7rem;
     flex: 1;
+    text-align: justify;
+    font-size: 1rem;
+    padding: 0 0.5rem;
 }
 
+.jogoImage {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0;
+    display: block;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+
+.jogoImage2 {
+    width: 130px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0;
+    display: block;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    margin-left: 1.5rem;
+    margin-right: 0.3rem;
+}
+
+.jogoInfo h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 8px #000a;
+    text-transform: uppercase;
+}
+
+
+@media (max-width: 900px) {
+    .jogos {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .jogosCard {
+        width: 90vw;
+        min-width: 220px;
+        max-width: 350px;
+    }
+}
 @media (max-width: 768px) {
     .banner {
         height: 500px;

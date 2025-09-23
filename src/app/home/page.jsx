@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Image from "next/image";
 import Link from "next/link";
 import Carousel from "../../components/Carousel";
+import Footer from "../../components/Footer";
 
 export default function Page() {
     const images = [
@@ -55,29 +56,51 @@ export default function Page() {
                     <Carousel images={images} />
                 </section>
                 <section className={styles.cenario}>
-                    <video 
-                        src="/image/cenario3.mp4" 
+                    <video
+                        src="/image/cenario3.mp4"
                         className={styles.cenarioVideo}
-                        autoPlay 
-                        loop 
-                        muted 
+                        autoPlay
+                        loop
+                        muted
                         playsInline
                     />
                 </section>
 
                 <section className={styles.jogos}>
-                    <div className={styles.jogosContent}>
-                        <h2>Conheça os Jogos</h2>
-                        <p>
-                            A série The Last of Us é composta por jogos aclamados pela crítica e
-                            pelos fãs, desenvolvidos pela Naughty Dog e publicados pela Sony
-                            Interactive Entertainment. O primeiro jogo, lançado em 2013 para o
-                            PlayStation 3, rapidamente se tornou um marco na indústria, combinando
-                            narrativa envolvente, personagens profundos e jogabilidade inovadora.
-                        </p>
+
+                    <div className={styles.jogosCard}>
+                        <Image
+                            src="/image/parte_I.png"
+                            alt="The Last of Us"
+                            width={180}
+                            height={180}
+                            className={styles.jogoImage}
+                        />
+                        <div className={styles.jogoInfo}>
+                            <h3>The Last of Us (2013 / Remake 2022)</h3>
+                            <p>
+                               Joel deve levar Ellie, uma jovem imune ao fungo que destruiu o mundo, por territórios perigosos. Uma missão que se torna uma jornada de amor, esperança e escolhas difíceis.
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.jogosCard}>
+                        <Image
+                            src="/image/part_II.png"
+                            alt="The Last of Us Part II"
+                            width={180}
+                            height={180}
+                            className={styles.jogoImage2}
+                        />
+                        <div className={styles.jogoInfo}>
+                            <h3>The Last of Us Part II (2020)</h3>
+                            <p>
+                                Cinco anos depois, a paz em Jackson é destruída. Ellie, movida pela dor e vingança, enfrenta inimigos e verdades dolorosas numa busca intensa por justiça.
+                            </p>
+                        </div>
                     </div>
                 </section>
-            </main>
+            </main> 
+            <Footer />
         </div>
     );
 }

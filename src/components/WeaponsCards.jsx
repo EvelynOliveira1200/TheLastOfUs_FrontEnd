@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/CardsWeapons.module.css";
+import styles from "../styles/Cards.module.css";
 import Image from "next/image";
 
 export default function WeaponsCards({ weapon, onClick }) {
@@ -13,7 +13,7 @@ export default function WeaponsCards({ weapon, onClick }) {
                 <Image
                     src={
                         weapon.photo
-                            ? `http://localhost:3000/uploads/${weapon.photo}.jpg`
+                            ? `http://localhost:4000/uploads/${weapon.photo}.jpg`
                             : "https://placehold.jp/200x200.png"
                     }
                     alt={weapon.name || "Arma"}

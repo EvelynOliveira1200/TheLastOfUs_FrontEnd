@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WeaponsCards from "../../components/WeaponsCards";
 import { Pagination } from 'antd';
-import styles from "./weapon.module.css";
+import styles from "./Weapon.module.css";
 import Link from "next/link";
 
 export default function Page() {
@@ -30,7 +30,7 @@ export default function Page() {
     const fetchWeapons = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:3000/api/weapons");
+            const response = await axios.get("http://localhost:4000/api/weapons");
             if (response.status === 200 && Array.isArray(response.data)) {
                 setWeapons(response.data);
             } else {

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/CardsWeapons.module.css";
+import styles from "../styles/Cards.module.css";
 import Image from "next/image";
 
 export default function InfectedCard({ infected, onClick }) {
