@@ -13,7 +13,7 @@ export default function InfectedCard({ infected, onClick }) {
         <div className={styles.cardContainer} onClick={onClick}>
             <div className={styles.card}>
                 <Image
-                    src={photo ? `http://localhost:3000/uploads/${infected.photo}.jpg` : "https://placehold.jp/200x200.png"}
+                    src={photo ? `http://localhost:4000/uploads/${infected.photo}.jpg` : "https://placehold.jp/200x200.png"}
                     alt={name}
                     width={150}
                     height={150}

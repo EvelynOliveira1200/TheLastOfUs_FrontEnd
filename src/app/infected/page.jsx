@@ -5,15 +5,18 @@ import InfectedCard from "../../components/InfectedCard";
 import { Pagination } from 'antd';
 import styles from "./infected.module.css";
 import Link from "next/link";
+import Header from "../../components/Header";
+import cardStyles from "../../styles/Cards.module.css";
+import Image from "next/image";
 
 export default function Page() {
 
     const [loading, setLoading] = useState(false);
-    const [infected, setInfected] = useState([]);
+    const [characters, setCharacters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(8);
+    const [pageSize, setPageSize] = useState(9);
 
-    const currentInfected = infected.slice(
+    const currentInfected = characters.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize
     );
@@ -27,32 +30,61 @@ export default function Page() {
         setCurrentPage(1);
     };
 
-    const fetchInfected = async () => {
+    const fetchCharacters = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:3000/api/infected");
+            const response = await axios.get("http://localhost:4000/api/infected");
             if (response.status === 200 && Array.isArray(response.data)) {
-                setInfected(response.data);
+                setCharacters(response.data);
             } else {
                 console.error("Resposta inesperada:", response);
             }
         } catch (error) {
-            console.error("Erro ao buscar infectados:", error);
+            console.error("Erro ao buscar personagens:", error);
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchInfected();
+        fetchCharacters();
     }, []);
 
     return (
         <div className={styles.container}>
+            <Header />
+            <div className={styles.banner}>
+                <Image
+                    src="/image/person.jpg"
+                    alt="The Last of Us - Personagens"
+                    layout="fill"
+                    objectFit="cover"
+                />
+                <div className={styles.bannerContent}>
+                    <h1 className={styles.bannerTitle}>Personagens</h1>
+                    <p className={styles.bannerSubtitle}>Explore os personagens inesquecíveis do universo de The Last of Us.</p>
+                </div>
+
+                <Link href="/infected">
+                    <button className={styles.bannerButton}>Ver Infectados</button>
+                </Link>
+
+            </div>
 
             {loading && <p className="text-center">Carregando...</p>}
 
-            <div className={styles.cardGrid}>
+            <section className={styles.cenario}>
+                <video
+                    src="/image/cenario3.mp4"
+                    className={styles.cenarioVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
+            </section>
+
+            <div className={cardStyles.cardsGrid}>
                 {currentInfected.length > 0 ? (
                     currentInfected.map((infected) => (
                         <InfectedCard
@@ -62,22 +94,20 @@ export default function Page() {
                         />
                     ))
                 ) : (
-                    !loading && <p className="text-center">Nenhum infectado encontrado.</p>
+                    !loading && <p className="text-center">Nenhum personagem encontrado.</p>
                 )}
             </div>
 
-            <div className="flex justify-center mt-4">
+            <div className={styles.paginationContainer}>
                 <Pagination
                     current={currentPage}
                     pageSize={pageSize}
-                    total={infected.length}
+                    total={characters.length}
                     onChange={handlePageChange}
                     showSizeChanger
                     onShowSizeChange={handlePageSizeChange}
                 />
             </div>
-
-            <Link href="/character">Ver todos os personagens</Link>
         </div>
     );
 }

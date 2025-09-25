@@ -4,15 +4,17 @@ import axios from "axios";
 import CharacterCards from "../../components/CharacterCards";
 import { Pagination } from 'antd';
 import styles from "./character.module.css";
+import cardStyles from "../../styles/Cards.module.css";
 import Image from "next/image";
 import Header from "../../components/Header";
+import Link from "next/link";
 
 export default function Page() {
 
     const [loading, setLoading] = useState(false);
     const [characters, setCharacters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(8);
+    const [pageSize, setPageSize] = useState(9);
 
     const currentCharacters = characters.slice(
         (currentPage - 1) * pageSize,
@@ -52,7 +54,7 @@ export default function Page() {
         <div className={styles.container}>
             <Header />
             <div className={styles.banner}>
-                <Image 
+                <Image
                     src="/image/person.jpg"
                     alt="The Last of Us - Personagens"
                     layout="fill"
@@ -61,12 +63,27 @@ export default function Page() {
                 <div className={styles.bannerContent}>
                     <h1 className={styles.bannerTitle}>Personagens</h1>
                     <p className={styles.bannerSubtitle}>Explore os personagens inesquecíveis do universo de The Last of Us.</p>
+                    
+                    <Link href="/infected">
+                        <button className={styles.bannerButton}>Ver Infectados</button>
+                    </Link>
                 </div>
             </div>
 
             {loading && <p className="text-center">Carregando...</p>}
 
-            <div className={styles.cardGrid}>
+            <section className={styles.cenario}>
+                <video
+                    src="/image/cenario3.mp4"
+                    className={styles.cenarioVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
+            </section>
+
+            <div className={cardStyles.cardsGrid}>
                 {currentCharacters.length > 0 ? (
                     currentCharacters.map((character) => (
                         <CharacterCards
@@ -80,7 +97,7 @@ export default function Page() {
                 )}
             </div>
 
-            <div className="flex justify-center mt-4">
+            <div className={styles.paginationContainer}>
                 <Pagination
                     current={currentPage}
                     pageSize={pageSize}

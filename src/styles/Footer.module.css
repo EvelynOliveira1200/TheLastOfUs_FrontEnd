@@ -1,11 +1,31 @@
+:root {
+    --card-bg-primary: #1a1916;
+    --card-bg-secondary: #252218;
+    --card-border: #2f2b24;
+    --accent-color: #f4a545;
+    --accent-color-soft: rgba(244, 165, 69, 0.08);
+    --accent-color-alpha: rgba(244, 165, 69, 0.12);
+    --text-primary: #fafafa;
+    --text-secondary: #d4d1ce;
+    --shadow-dark: rgba(0,0,0,0.45);
+    --shadow-light: rgba(0,0,0,0.18);
+    --shadow-hover: rgba(0,0,0,0.55);
+    --bg-gradient-start: rgba(26, 25, 22, 0.85);
+    --bg-gradient-end: rgba(37, 34, 24, 0.92);
+    --border-alpha: rgba(37, 34, 24, 0.5);
+
+    --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
 .footer {
     background: rgba(20, 20, 20, 0.92);
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.35);
+    box-shadow: 0 -4px 24px var(--shadow-dark);
     backdrop-filter: blur(10px);
-    border-top: 1px solid #ff99005e;
+    border-top: 1px solid rgba(255, 153, 0, 0.37);
     width: 100%;
     height: 4rem;
-    color: #f0f0f0;
+    color: var(--text-primary);
     text-align: center;
     padding: 1.5rem 0;
 }
