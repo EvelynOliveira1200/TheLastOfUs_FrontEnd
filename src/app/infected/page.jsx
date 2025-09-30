@@ -12,11 +12,11 @@ import Image from "next/image";
 export default function Page() {
 
     const [loading, setLoading] = useState(false);
-    const [characters, setCharacters] = useState([]);
+    const [infected, setInfected] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(9);
 
-    const currentInfected = characters.slice(
+    const currentInfected = infected.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize
     );
@@ -30,24 +30,24 @@ export default function Page() {
         setCurrentPage(1);
     };
 
-    const fetchCharacters = async () => {
+    const fetchInfected = async () => {
         setLoading(true);
         try {
             const response = await axios.get("http://localhost:4000/api/infected");
             if (response.status === 200 && Array.isArray(response.data)) {
-                setCharacters(response.data);
+                setInfected(response.data);
             } else {
                 console.error("Resposta inesperada:", response);
             }
         } catch (error) {
-            console.error("Erro ao buscar personagens:", error);
+            console.error("Erro ao buscar infectados:", error);
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchCharacters();
+        fetchInfected();
     }, []);
 
     return (
@@ -56,19 +56,18 @@ export default function Page() {
             <div className={styles.banner}>
                 <Image
                     src="/image/person.jpg"
-                    alt="The Last of Us - Personagens"
+                    alt="The Last of Us - Infectados"
                     layout="fill"
                     objectFit="cover"
                 />
                 <div className={styles.bannerContent}>
-                    <h1 className={styles.bannerTitle}>Personagens</h1>
-                    <p className={styles.bannerSubtitle}>Explore os personagens inesquecíveis do universo de The Last of Us.</p>
+                    <h1 className={styles.bannerTitle}>Infectados</h1>
+                    <p className={styles.bannerSubtitle}>Explore os infectados aterrorizantes do universo de The Last of Us.</p>
+                    
+                    <Link href="/weapon">
+                        <button className={styles.bannerButton}>Ver Armas</button>
+                    </Link>
                 </div>
-
-                <Link href="/infected">
-                    <button className={styles.bannerButton}>Ver Infectados</button>
-                </Link>
-
             </div>
 
             {loading && <p className="text-center">Carregando...</p>}
@@ -94,7 +93,7 @@ export default function Page() {
                         />
                     ))
                 ) : (
-                    !loading && <p className="text-center">Nenhum personagem encontrado.</p>
+                    !loading && <p className="text-center">Nenhum infectado encontrado.</p>
                 )}
             </div>
 
@@ -102,7 +101,7 @@ export default function Page() {
                 <Pagination
                     current={currentPage}
                     pageSize={pageSize}
-                    total={characters.length}
+                    total={infected.length}
                     onChange={handlePageChange}
                     showSizeChanger
                     onShowSizeChange={handlePageSizeChange}

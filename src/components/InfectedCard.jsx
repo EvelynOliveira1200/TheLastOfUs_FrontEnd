@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/Cards.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function InfectedCard({ infected, onClick }) {
     const name = infected?.name || "Desconhecido";
@@ -17,15 +18,16 @@ export default function InfectedCard({ infected, onClick }) {
                     alt={name}
                     width={150}
                     height={150}
-                    className={styles.jogoFoto}
+                    className={styles.cardImage}
                     unoptimized
                 />
                 <div className={styles.cardContent}>
                     <h1 className={styles.title}>{name}</h1>
                     <p className={styles.text}><span className={styles.span}>Nível de ameaça: </span>{threatLevel}</p>
-                    <p className={styles.text}><span className={styles.span}>Fraquezas: </span>{weaknesses}</p>
-                    <p className={styles.text}>{description}</p>
                 </div>
+                <Link href={`/infected/${infected.id}`}>
+                    <button className={styles.cardLink}>Ver Detalhes</button>
+                </Link>
             </div>
         </div>
     );

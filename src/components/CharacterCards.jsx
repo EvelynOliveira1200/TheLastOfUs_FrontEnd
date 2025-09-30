@@ -7,6 +7,7 @@ export default function CharacterCardsList({ character, onClick }) {
     const name = character?.name || "Desconhecido";
     const photo = character?.photo;
     const quotes = character?.quotes || "";
+    
     return (
         <div className={styles.cardContainer} onClick={() => onClick && onClick(character)}>
             <div className={styles.card}>
@@ -22,7 +23,7 @@ export default function CharacterCardsList({ character, onClick }) {
                     <h1 className={styles.title}>{name}</h1>
                     {quotes && <p className={styles.text}>{quotes}</p>}
                 </div>
-                <Link href={`/characters/${character.id}`}>
+                <Link href={`/character/${character.id}`}>
                     <button className={styles.cardLink}>Ver Detalhes</button>
                 </Link>
             </div>

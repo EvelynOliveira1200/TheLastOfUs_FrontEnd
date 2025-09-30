@@ -5,15 +5,18 @@ import WeaponsCards from "../../components/WeaponsCards";
 import { Pagination } from 'antd';
 import styles from "./Weapon.module.css";
 import Link from "next/link";
+import Header from "../../components/Header";
+import cardStyles from "../../styles/Cards.module.css";
+import Image from "next/image";
 
 export default function Page() {
 
     const [loading, setLoading] = useState(false);
-    const [characters, setCharacters] = useState([]);
+    const [weapons, setWeapons] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(9);
 
-    const currentCharacters = characters.slice(
+    const currentWeapons = weapons.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize
     );
@@ -27,24 +30,24 @@ export default function Page() {
         setCurrentPage(1);
     };
 
-    const fetchCharacters = async () => {
+    const fetchWeapons = async () => {
         setLoading(true);
         try {
             const response = await axios.get("http://localhost:4000/api/weapons");
             if (response.status === 200 && Array.isArray(response.data)) {
-                setCharacters(response.data);
+                setWeapons(response.data);
             } else {
                 console.error("Resposta inesperada:", response);
             }
         } catch (error) {
-            console.error("Erro ao buscar personagens:", error);
+            console.error("Erro ao buscar armas:", error);
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchCharacters();
+        fetchWeapons();
     }, []);
 
     return (
@@ -53,19 +56,18 @@ export default function Page() {
             <div className={styles.banner}>
                 <Image
                     src="/image/person.jpg"
-                    alt="The Last of Us - Personagens"
-                    layout="fill"
-                    objectFit="cover"
+                    alt="The Last of Us - Armas"
+                    fill
+                    style={{ objectFit: 'cover' }}
                 />
                 <div className={styles.bannerContent}>
-                    <h1 className={styles.bannerTitle}>Personagens</h1>
-                    <p className={styles.bannerSubtitle}>Explore os personagens inesquecíveis do universo de The Last of Us.</p>
+                    <h1 className={styles.bannerTitle}>Armas</h1>
+                    <p className={styles.bannerSubtitle}>Explore o arsenal de sobrevivência do universo de The Last of Us.</p>
+                    
+                    <Link href="/character">
+                        <button className={styles.bannerButton}>Ver Personagens</button>
+                    </Link>
                 </div>
-
-                <Link href="/infected">
-                    <button className={styles.bannerButton}>Ver Infectados</button>
-                </Link>
-
             </div>
 
             {loading && <p className="text-center">Carregando...</p>}
@@ -82,16 +84,16 @@ export default function Page() {
             </section>
 
             <div className={cardStyles.cardsGrid}>
-                {currentCharacters.length > 0 ? (
-                    currentCharacters.map((character) => (
-                        <CharacterCards
-                            key={character.id}
-                            character={character}
-                            onClick={() => console.log(character.name)}
+                {currentWeapons.length > 0 ? (
+                    currentWeapons.map((weapon) => (
+                        <WeaponsCards
+                            key={weapon.id}
+                            weapon={weapon}
+                            onClick={() => console.log(weapon.name)}
                         />
                     ))
                 ) : (
-                    !loading && <p className="text-center">Nenhum personagem encontrado.</p>
+                    !loading && <p className="text-center">Nenhuma arma encontrada.</p>
                 )}
             </div>
 
@@ -99,7 +101,7 @@ export default function Page() {
                 <Pagination
                     current={currentPage}
                     pageSize={pageSize}
-                    total={characters.length}
+                    total={weapons.length}
                     onChange={handlePageChange}
                     showSizeChanger
                     onShowSizeChange={handlePageSizeChange}

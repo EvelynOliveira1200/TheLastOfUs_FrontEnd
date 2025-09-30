@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/Cards.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function WeaponsCards({ weapon, onClick }) {
     const name = weapon?.name || "Desconhecido";
@@ -19,13 +20,17 @@ export default function WeaponsCards({ weapon, onClick }) {
                     alt={weapon.name || "Arma"}
                     width={150}
                     height={150}
-                    className={styles.jogoFoto}
+                    className={styles.cardImage}
+                    unoptimized
                 />
                 <div className={styles.cardContent}>
                     <h1 className={styles.title}>{name}</h1>
                     <p className={styles.text}><span className={styles.span}>Tipo: </span>{type}</p>
                     <p className={styles.text}>{description}</p>
                 </div>
+                <Link href={`/weapons/${weapon.id}`}>
+                    <button className={styles.cardLink}>Ver Detalhes</button>
+                </Link>
             </div>
         </div>
     );
