@@ -1,0 +1,293 @@
+:root {
+    --threat-bg-primary: #1a1916;
+    --threat-bg-secondary: #252218;
+    --threat-border: #2f2b24;
+    --threat-accent: #f4a545;
+    --threat-text-primary: #fafafa;
+    --threat-text-secondary: #d4d1ce;
+    --threat-shadow-dark: rgba(0, 0, 0, 0.45);
+    --threat-shadow-light: rgba(0, 0, 0, 0.18);
+    --threat-glow: rgba(244, 165, 69, 0.6);
+}
+
+@keyframes threatPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 5px var(--threat-color),
+            0 0 10px var(--threat-color),
+            inset 0 0 8px rgba(255, 255, 255, 0.1);
+        transform: scaleY(1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 15px var(--threat-color),
+            0 0 25px var(--threat-color),
+            0 0 35px var(--threat-color),
+            inset 0 0 12px rgba(255, 255, 255, 0.2);
+        transform: scaleY(1.05);
+    }
+}
+
+@keyframes threatFill {
+    0% {
+        width: 0%;
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-20px) translateX(10px) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shimmerEffect {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(200px);
+    }
+}
+
+.threatContainer {
+    background: linear-gradient(135deg, var(--threat-bg-primary) 0%, var(--threat-bg-secondary) 100%);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow:
+        0 4px 15px var(--threat-shadow-dark),
+        inset 0 1px 0 rgba(244, 165, 69, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.threatContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(244, 165, 69, 0.05) 50%,
+            transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.threatLevelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.threatLabel {
+    font-size: 0.9rem;
+    color: var(--threat-text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.threatText {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    filter: drop-shadow(0 0 3px currentColor);
+    position: relative;
+}
+
+.threatText::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    opacity: 0.4;
+    filter: blur(2px);
+}
+
+.threatBarContainer {
+    position: relative;
+    height: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px var(--threat-shadow-light);
+}
+
+.threatBarBackground {
+    display: flex;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(244, 165, 69, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.threatBarSegment {
+    flex: 1;
+    height: 100%;
+    margin-right: 2px;
+    background: rgba(100, 100, 100, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s ease;
+    border-radius: 2px;
+}
+
+.threatBarSegment:last-child {
+    margin-right: 0;
+}
+
+.threatBarSegment.active {
+    background: linear-gradient(135deg,
+            var(--threat-color) 0%,
+            color-mix(in srgb, var(--threat-color) 80%, white 20%) 50%,
+            var(--threat-color) 100%);
+    animation: threatFill 0.8s ease-out var(--segment-delay) both;
+    position: relative;
+}
+
+.threatBarSegment.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.6),
+            transparent);
+    animation: shimmerEffect 1.5s ease-in-out var(--segment-delay) infinite;
+}
+
+.threatBarSegment.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.1) 100%);
+}
+
+.threatBarSegment.active.low {
+    animation: threatFill 0.8s ease-out var(--segment-delay) both;
+}
+
+.threatBarSegment.active.medium {
+    animation: threatFill 0.8s ease-out var(--segment-delay) both, threatPulse 2s ease-in-out infinite 1s;
+}
+
+.threatBarSegment.active.high {
+    animation: threatFill 0.8s ease-out var(--segment-delay) both, threatPulse 1.5s ease-in-out infinite 1s;
+}
+
+.threatBarSegment.active.extreme {
+    animation: threatFill 0.8s ease-out var(--segment-delay) both, threatPulse 1s ease-in-out infinite 1s;
+}
+
+.threatBarSegment.active.deadly {
+    animation: threatFill 0.8s ease-out var(--segment-delay) both, threatPulse 0.8s ease-in-out infinite 1s;
+    box-shadow:
+        0 0 10px var(--threat-color),
+        0 0 20px var(--threat-color),
+        inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.threatParticles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--particle-color);
+    border-radius: 50%;
+    animation: particleFloat var(--particle-duration) ease-in-out var(--particle-delay) infinite;
+    box-shadow: 0 0 4px var(--particle-color);
+}
+
+.particle:nth-child(odd) {
+    left: 20%;
+    animation-duration: 3s;
+}
+
+.particle:nth-child(even) {
+    left: 60%;
+    animation-duration: 2.5s;
+}
+
+.particle:nth-child(3n) {
+    left: 80%;
+    animation-duration: 3.5s;
+}
+
+@media (max-width: 768px) {
+    .threatLevelContainer {
+        padding: 0.8rem;
+    }
+
+    .threatLevelHeader {
+        margin-bottom: 0.6rem;
+    }
+
+    .threatLabel {
+        font-size: 0.8rem;
+    }
+
+    .threatText {
+        font-size: 0.9rem;
+    }
+
+    .threatBarContainer {
+        height: 10px;
+    }
+}
