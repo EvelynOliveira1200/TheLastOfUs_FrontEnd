@@ -379,8 +379,6 @@
     z-index: -1;
 }
 
-
-
 .card::after {
     content: '';
     position: absolute;
@@ -517,6 +515,22 @@
         0 8px 25px rgba(244, 165, 69, 0.5),
         0 0 20px rgba(244, 165, 69, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.tipoLabel {
+  color: #fafafa;
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  letter-spacing: 0.5px;
+}
+
+.tipoValue {
+  color: #fafafa;
+  font-weight: 100;
+  font-size: 1.1rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  margin-left: 2px;
 }
 
 .cardLink:hover::before {

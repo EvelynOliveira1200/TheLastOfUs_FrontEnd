@@ -25,8 +25,7 @@ export default function WeaponsCards({ weapon, onClick }) {
                 />
                 <div className={styles.cardContent}>
                     <h1 className={styles.title}>{name}</h1>
-                    <p className={styles.text}><span className={styles.span}>Tipo: </span>{type}</p>
-                    <p className={styles.text}>{description}</p>
+                    <p className={styles.text}><span className={styles.tipoLabel}>Tipo: </span><span className={styles.tipoValue}>{type}</span></p>
                 </div>
                 <Link href={`/weapons/${weapon.id}`}>
                     <button className={styles.cardLink}>Ver Detalhes</button>
