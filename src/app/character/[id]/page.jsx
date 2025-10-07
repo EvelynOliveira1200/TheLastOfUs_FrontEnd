@@ -1,86 +1,105 @@
-"use client";
 
-import { useState, useEffect, use } from "react";
-import { Spin } from "antd";;
+"use client";
+import Link from "next/link";
+
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { Spin } from "antd";
 import axios from "axios";
 import styles from "./[id].module.css";
 import Header from "../../../components/Header";
 import Image from "next/image";
 
-export default function characterDetails({ params }) {
+export default function CharacterDetails() {
     const [loading, setLoading] = useState(true);
     const [character, setCharacter] = useState(null);
+    const { id } = useParams();
 
+    useEffect(() => {
+        if (!id) return;
 
-    const name = character?.name || "Desconhecido";
-    const photo = character?.photo;
-    const quotes = character?.quotes || "";
-    const favorite_weapon = character?.favorite_weapon || "Desconhecido";
+        const fetchCharacter = async () => {
+            try {
+                const res = await axios.get(`http://localhost:4000/api/characters/${id}`);
+                const payload = res.data;
+                const data = payload?.character || payload?.data || payload;
+                setCharacter(data);
+            } catch (err) {
+                console.error("Erro ao buscar personagem:", err);
+                setCharacter(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCharacter();
+    }, [id]);
+
+    const name = character?.name || character?.nome || "Desconhecido";
+    const photo = character?.photo || "";
+    const quotes = character?.quotes || character?.quote || "";
+    const favorite_weapon =
+        character?.favorite_weapon || character?.favoriteWeapon || "Desconhecido";
     const role = character?.role || "Desconhecido";
     const description = character?.description || "Sem descrição.";
     const game = character?.game || "Desconhecido";
 
-
-    const resolvedParams = use(params);
-
-    // Função simplificada para buscar personagem
-    const fetchCharacters = async (characterId) => {
-        try {
-            const response = await axios.get(`http://localhost:4000/api/characters/${characterId}`);
-            setCharacter(response.data);
-        } catch (error) {
-            console.error("Erro ao buscar personagem:", error);
-            setCharacter(null);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Executa a busca quando o componente carrega
-    useEffect(() => {
-        if (resolvedParams?.id) {
-            fetchCharacters(resolvedParams.id);
-        }
-    }, [resolvedParams?.id]);
-
-    // Tela de carregamento
-    if (loading) {
-        return (
-            <div className={styles.container}>
-                <div className={styles.loadingWrapper}>
-                    <Spin size="large" />
-                    <p className={styles.loadingText}>Carregando detalhes do usuário...</p>
-                </div>
-            </div>
-        );
-    }
-
-    // Conteúdo principal
     return (
         <div className={styles.container}>
-            {/* Cabeçalho com botão voltar */}
-            
             <Header />
 
-            <div className={styles.content}>
-                <Image
-                    src={photo ? `http://localhost:4000/uploads/${character.photo}.jpg` : "https://placehold.jp/200x200.png"}
-                    alt={name}
-                    width={150}
-                    height={150}
-                    className={styles.cardImage}
-                    unoptimized
-                />
-
-                <div className={styles.cardContent}>
-                   <h1 className={styles.title}>{name}</h1>
-                    {quotes && <p className={styles.text}>{quotes}</p>}
-                    <p className={styles.text}><span className={styles.span}>Arma Favorita: </span>{favorite_weapon}</p>
-                    <p className={styles.text}><span className={styles.span}>Papel: </span>{role}</p>
-                    <p className={styles.text}><span className={styles.span}>Jogo: </span>{game}</p>
-                    <p className={styles.text}>{description}</p>
+            {loading ? (
+                <div className={styles.loadingWrapper}>
+                    <Spin size="large" />
+                    <p className={styles.loadingText}>Carregando detalhes do personagem...</p>
                 </div>
-            </div>
+            ) : !character ? (
+                <p className={styles.errorText}>Personagem não encontrado.</p>
+            ) : (
+                <div className={styles.cardWrapper}>
+                    <div className={styles.cardContainer}>
+                        <Image
+                            src={
+                                photo
+                                    ? `http://localhost:4000/uploads/${character.photo}.jpg`
+                                    : "https://placehold.jp/200x200.png"
+                            }
+                            alt={name}
+                            width={150}
+                            height={150}
+                            className={styles.cardImage}
+                            unoptimized
+                        />
+
+                        <div className={styles.cardContent}>
+                            <h1 className={styles.title_name}>{name}</h1>
+
+                            {quotes && <p className={styles.text}>{quotes}</p>}
+                            <p className={styles.text}>{description}</p>
+
+                            <p className={styles.text}>
+                                <span className={styles.span}>Arma Favorita: </span>
+                                {favorite_weapon}
+                            </p>
+
+                            <p className={styles.text}>
+                                <span className={styles.span}>Papel: </span>
+                                {role}
+                            </p>
+
+                            <p className={styles.text}>
+                                <span className={styles.span}>Jogo: </span>
+                                {game}
+                            </p>
+                            <div className={styles.buttonContainer}>
+                            <Link href="/character">
+                                <button className={styles.backButton}>Voltar</button>
+                            </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

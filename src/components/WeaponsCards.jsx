@@ -7,6 +7,7 @@ export default function WeaponsCards({ weapon, onClick }) {
     const name = weapon?.name || "Desconhecido";
     const type = weapon?.type || "Desconhecido";
     const description = weapon?.description || "Sem descrição.";
+    const id = weapon?._id || weapon?.id;
 
     return (
         <div className={styles.cardContainer} onClick={onClick}>
@@ -27,7 +28,7 @@ export default function WeaponsCards({ weapon, onClick }) {
                     <h1 className={styles.title}>{name}</h1>
                     <p className={styles.text}><span className={styles.tipoLabel}>Tipo: </span><span className={styles.tipoValue}>{type}</span></p>
                 </div>
-                <Link href={`/weapons/${weapon.id}`}>
+                <Link href={`/weapon/${id}`}>
                     <button className={styles.cardLink}>Ver Detalhes</button>
                 </Link>
             </div>

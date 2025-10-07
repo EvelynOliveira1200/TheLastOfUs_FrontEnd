@@ -8,6 +8,7 @@ export default function InfectedCard({ infected, onClick }) {
     const name = infected?.name || "Desconhecido";
     const photo = infected?.photo;
     const threatLevel = infected?.threat_level || "N/A";
+    const id = infected?._id || infected?.id;
 
     return (
         <div className={styles.cardContainer} onClick={onClick}>
@@ -24,7 +25,7 @@ export default function InfectedCard({ infected, onClick }) {
                     <h1 className={styles.title}>{name}</h1>
                     <LevelInfected threatLevel={threatLevel} />
                 </div>
-                <Link href={`/infected/${infected.id}`}>
+                <Link href={`/infected/${id}`}>
                     <button className={styles.cardLink}>Ver Detalhes</button>
                 </Link>
             </div>
