@@ -86,7 +86,18 @@
     z-index: 3;
     max-width: 700px;
     margin-left: 10rem;
-    top: -6rem;
+}
+
+.bannerTitle {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+    text-shadow: 3px 3px 12px var(--shadow-hover), 1px 1px 6px var(--shadow-dark);
+    color: var(--text-primary);
+    padding: 1rem 0.2rem;
+    border-radius: 8px;
 }
 
 .bannerTitle {

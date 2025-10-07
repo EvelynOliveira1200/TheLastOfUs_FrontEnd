@@ -8,6 +8,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import cardStyles from "../../styles/Cards.module.css";
 import Image from "next/image";
+import Footer from "../../components/Footer";
 
 export default function Page() {
 
@@ -61,8 +62,7 @@ export default function Page() {
                     style={{ objectFit: 'cover' }}
                 />
                 <div className={styles.bannerContent}>
-                    <h1 className={styles.bannerTitle}>Armas</h1>
-                    <p className={styles.bannerSubtitle}>Explore o arsenal de sobrevivência do universo de The Last of Us.</p>
+                    <h3 className={styles.bannerTitle}>Explore o arsenal letal de The Last of Us e domine cada batalha.</h3>
                     
                     <Link href="/character">
                         <button className={styles.bannerButton}>Ver Personagens</button>
@@ -107,6 +107,7 @@ export default function Page() {
                     onShowSizeChange={handlePageSizeChange}
                 />
             </div>
+            <Footer />
         </div>
     );
 }

@@ -262,3 +262,69 @@
 .headerSearchModal .ant-modal-close:hover {
     transform: rotate(90deg) scale(1.1);
 }
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+    .header {
+        padding: 1.2rem 3rem;
+        height: auto;
+    }
+    .menuItem {
+        font-size: 1rem;
+    }
+    .searchButton {
+        padding: 0.35rem 0.9rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0.8rem 1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+        height: auto;
+        position: fixed;
+    }
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.2rem 0;
+    }
+    .menuItem {
+        font-size: 0.95rem;
+    }
+    .menuItem a {
+        padding: 6px 8px;
+    }
+    .menuItem:last-child a {
+        padding: 6px 10px;
+    }
+    .headerSearchModal .ant-modal-content {
+        padding: 1.2rem 1rem 0.8rem 1rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .header {
+        padding: 0.6rem 0.8rem;
+        gap: 0.4rem;
+    }
+    .menu {
+        gap: 0.4rem;
+    }
+    .menuItem {
+        font-size: 0.9rem;
+    }
+    .searchButton {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+    .headerSearchInput {
+        font-size: 0.95rem;
+        padding: 0.55rem 0.8rem;
+    }
+}

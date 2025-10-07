@@ -550,31 +550,90 @@
     }
 }
 
+@media (max-width: 1200px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 1.6rem;
+    max-width: 980px;
+  }
+
+  .cardContainer {
+    max-width: 100%;
+    min-height: 420px;
+    padding: 1.2rem;
+  }
+
+  .cardImage {
+    max-width: 240px;
+    height: 240px;
+  }
+
+  .cardContent {
+    padding: 0.8rem 1rem;
+  }
+}
+
 @media (max-width: 768px) {
     .cardsGrid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.2rem;
         padding: 1rem;
-        max-width: 400px;
+        max-width: 720px;
     }
     
     .cardContainer {
-        max-width: 100%;
-        min-height: 420px;
+        margin: 1rem auto;
+        max-width: 680px;
+        min-height: auto;
+        padding: 1rem;
+        border-radius: 12px;
     }
     
     .cardImage {
-        height: 250px;
-        max-width: 250px;
+        max-width: 200px;
+        height: 200px;
+        margin: 0 auto 0.8rem auto;
     }
     
+    .cardContent {
+        padding: 0.6rem 0.8rem;
+        text-align: center;
+    }
+
     .title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
-    
-    .text {
-        font-size: 0.85rem;
-    }
+}
+
+@media (max-width: 420px) {
+  .cardsGrid {
+    padding: 0.6rem;
+    gap: 0.9rem;
+  }
+
+  .cardContainer {
+    padding: 0.8rem;
+    border-radius: 10px;
+  }
+
+  .cardImage {
+    max-width: 140px;
+    height: 140px;
+  }
+
+  .cardContent {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .cardLink, .backButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
 }
 
 @keyframes cardEntrance {

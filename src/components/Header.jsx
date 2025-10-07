@@ -59,16 +59,20 @@ export default function Header() {
             <nav aria-label="Menu principal">
                 <ul className={styles.menu}>
                     <li className={styles.menuItem}>
-                        <Link href="/character">Personagens</Link>
+                        <Link href="/home">Home</Link>
                     </li>
                     <li className={styles.menuItem}>
-                        <Link href="/weapon">Armas</Link>
+                        <Link href="/character">Personagens</Link>
                     </li>
                     <li className={styles.menuItem}>
                         <Link href="/infected">Infectados</Link>
                     </li>
                     <li className={styles.menuItem}>
-                        <Link href="#">Sobre</Link>
+                        <Link href="/weapon">Armas</Link>
+                    </li>
+                    
+                    <li className={styles.menuItem}>
+                        <Link href="/sobre">Sobre</Link>
                     </li>
                     <li className={styles.menuItem}>
                         <button

@@ -99,9 +99,6 @@
   animation: borderGlow 2.5s linear infinite;
 }
 
-.cardContainer:hover::before { opacity: 1; }
-.cardContainer:hover::after { opacity: 0.9; }
-
 .cardImage {
   flex-shrink: 0;
   width: 350px;

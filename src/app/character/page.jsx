@@ -8,6 +8,7 @@ import cardStyles from "../../styles/Cards.module.css";
 import Image from "next/image";
 import Header from "../../components/Header";
 import Link from "next/link";
+import Footer from "../../components/Footer";
 
 export default function Page() {
 
@@ -61,8 +62,7 @@ export default function Page() {
                     objectFit="cover"
                 />
                 <div className={styles.bannerContent}>
-                    <h1 className={styles.bannerTitle}>Personagens</h1>
-                    <p className={styles.bannerSubtitle}>Explore os personagens inesquecíveis do universo de The Last of Us.</p>
+                    <h3 className={styles.bannerTitle}>Explore o mundo de The Last of Us através de seus personagens icônicos e memoráveis.</h3>
                     
                     <Link href="/infected">
                         <button className={styles.bannerButton}>Ver Infectados</button>
@@ -107,6 +107,8 @@ export default function Page() {
                     onShowSizeChange={handlePageSizeChange}
                 />
             </div>
+            <Footer />
         </div>
+        
     );
 }
